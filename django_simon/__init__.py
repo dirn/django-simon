@@ -3,7 +3,7 @@ __version__ = '0.1.0'
 from django.conf import settings
 from django.http import Http404
 from pymongo import uri_parser
-from simon import connection
+from simon import Model, connection, geo, query
 
 __all__ = ('simonize', 'get_list_or_404', 'get_object_or_404')
 
