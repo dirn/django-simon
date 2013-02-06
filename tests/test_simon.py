@@ -39,7 +39,7 @@ class TestSimon(unittest.TestCase):
 
             connect.assert_called_with('localhost:27017', name='simon',
                                        alias='test', username=None,
-                                       password=None, replicaSet=None)
+                                       password=None, replica_set=None)
 
     def test_simonize_default(self):
         """Test the `simonize()` method with defaults."""
@@ -51,7 +51,7 @@ class TestSimon(unittest.TestCase):
 
             connect.assert_called_with('localhost:27017', name='simon',
                                        alias=None, username=None,
-                                       password=None, replicaSet=None)
+                                       password=None, replica_set=None)
 
     def test_simonize_invaliduri(self):
         """Test that `simonize()` raises `InvalidURI`."""
@@ -73,13 +73,13 @@ class TestSimon(unittest.TestCase):
 
             connect.assert_called_with(mongo_uri, name='mongo', alias=None,
                                        username=None, password=None,
-                                       replicaSet=None)
+                                       replica_set=None)
 
             django_simon.simonize(prefix='SIMON')
 
             connect.assert_called_with(simon_uri, name='simon', alias=None,
                                        username=None, password=None,
-                                       replicaSet=None)
+                                       replica_set=None)
 
     def test_simonize_prefix(self):
         """Test the `simonize()` method with prefixed settings."""
@@ -95,7 +95,7 @@ class TestSimon(unittest.TestCase):
             connect.assert_called_with('simon.example.com:1234', name='simon',
                                        alias=None, username='uname',
                                        password='passwd',
-                                       replicaSet='simon-rs')
+                                       replica_set='simon-rs')
 
     def test_simonize_settings(self):
         """Test the `simonize()` method with individual settings."""
@@ -111,7 +111,7 @@ class TestSimon(unittest.TestCase):
             connect.assert_called_with('simon.example.com:1234', name='simon',
                                        alias=None, username='uname',
                                        password='passwd',
-                                       replicaSet='simon-rs')
+                                       replica_set='simon-rs')
 
     def test_simonize_uri(self):
         """Test the `simonize()` method with a URI."""
@@ -124,7 +124,7 @@ class TestSimon(unittest.TestCase):
             connect.assert_called_with('mongodb://localhost/simon',
                                        name='simon', alias=None,
                                        username=None, password=None,
-                                       replicaSet=None)
+                                       replica_set=None)
 
     def test_simonize_uri_all(self):
         """Test the `simonize()` method with a URI with everything."""
@@ -137,7 +137,7 @@ class TestSimon(unittest.TestCase):
 
             connect.assert_called_with(uri, name='simon', alias=None,
                                        username='uname', password='passwd',
-                                       replicaSet='simon-rs')
+                                       replica_set='simon-rs')
 
     def test_simonize_uri_valueerror(self):
         """Test that `simonize()` raises `ValueError` with a URI."""
