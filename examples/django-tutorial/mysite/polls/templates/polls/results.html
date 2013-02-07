@@ -4,7 +4,7 @@
 
 <ul>
     {% for choice in poll.choices %}
-        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+        <li>{{ choice.choice_text }} -- {% if choice.votes %}{{ choice.votes }}{% else %}0{% endif %} vote{{ choice.votes|pluralize }}</li>
     {% endfor %}
 </ul>
 
