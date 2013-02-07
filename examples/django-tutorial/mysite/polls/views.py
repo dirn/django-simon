@@ -25,16 +25,15 @@ def results(request, poll_id):
 def vote(request, poll_id):
     p = get_object_or_404(Poll, id=poll_id)
 
-    index = 0
-    for choice in p.choices:
-        if choice.choice_text == request.POST['choice']:
-            p.raw_update({'$inc': {'choices.{0}.votes'.format(index): 1}})
-            break
-        index += 1
-    if index == len(p.choices):
-        return render(request, 'polls/detail.html', {
-            'poll': p,
-            'error_message': "You didn't select a choice.",
-        })
+    if 'choice' in request.POST:
+        index = 0
+        for choice in p.choices:
+            if choice['choice_text'] == request.POST['choice']:
+                p.raw_update({'$inc': {'choices.{0}.votes'.format(index): 1}})
+                return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+            index += 1
+    return render(request, 'polls/detail.html', {
+        'poll': p,
+        'error_message': "You didn't select a choice.",
+    })
 
-    return HttpResponseRedirect(reverse('results', args=(p.id,)))
