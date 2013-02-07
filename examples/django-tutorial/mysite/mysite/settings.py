@@ -153,3 +153,5 @@ LOGGING = {
         },
     }
 }
+
+MONGO_URI = 'mongodb://localhost/mysite'
